@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services
+        https://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="app_onesignal_notifications.service.config" class="OneSignal\Config" public="true">
+            <call method="setApplicationId">
+                <argument>%one_signal_notifications.app_id%</argument>
+            </call>
+            <call method="setApplicationAuthKey">
+                <argument>%one_signal_notifications.api_key%</argument>
+            </call>
+        </service>
+        <service id="app_onesignal_notifications.service.httpclient" class="App\Bundle\OneSignalNotificationsBundle\DependencyInjection\AppHttpClient" public="true">
+        </service>
+        <service id="app_onesignal_notifications.service.client" class="OneSignal\OneSignal" public="true">
+            <argument type="service" id="app_onesignal_notifications.service.config" />
+            <argument type="service" id="app_onesignal_notifications.service.httpclient" />
+        </service>
+    </services>
+</container>
